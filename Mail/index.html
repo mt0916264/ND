@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="shortcut icon" type="imagex/png" href="https://cdn-icons-png.freepik.com/512/7893/7893963.png">
+    <meta name="description" content="ND MAIL V1 | TempMail | Gerador de E-mail temporário e seguro">
+    <script>
+        document.addEventListener('keydown', function(e) {
+            // Verifica se a tecla Ctrl está pressionada junto com S, J ou I
+            if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'j' || e.key === 'J' || e.key === 'u' || e.key === 'U' || e.key === 'i' || e.key === 'I')) {
+                e.preventDefault(); // Impede a ação padrão
+                alert('Você foi infectado, não tente roubar nosso site! 👹'); // Mensagem que aparece ao tentar executar algumas das funções bloqueadas
+            }
+        });
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ND MAIL V1 | OFICIAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #34a853;
+            --background-color: #111;
+            --text-color: #ffffff;
+            --card-background: #161616;
+            --border-color: #1d1d1d;
+            --hover-color: #111;
+            --unread-color: #111;
+            --border-radius: 8px;
+            --box-shadow: 0 1px 2px 0 #b700ff, 0 1px 3px 1px #861ab1;
+        }
+
+        .neon-divider {
+        height: 2px;
+        width: 100%; /* Faz a linha ocupar toda a largura */
+        background-color: #b700ff; /* Cor da linha */
+        box-shadow: 0 0 10px #b700ff; /* Efeito de brilho */
+        margin: 20px 0; /* Margem opcional para espaçamento */
+        }
+
+        .wiggle {
+        display: inline-block;
+        cursor: pointer;
+        font-size: 1rem; /* Tamanho do texto */
+        color: #b700ff; /* Cor do texto */
+        }
+
+        .wiggle span {
+        display: inline-block;
+        animation: wiggle 1s infinite alternate; /* Duração aumentada para 1 segundo */
+        }
+
+        @keyframes wiggle {
+        0% {
+            transform: translateY(0);
+        }
+        25% {
+            transform: translateY(-5px);
+        }
+        50% {
+            transform: translateY(5px);
+        }
+        75% {
+            transform: translateY(-3px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+        }
+
+        .wiggle span:nth-child(odd) {
+        animation-delay: 0s;
+        }
+
+        .wiggle span:nth-child(even) {
+        animation-delay: 0.1s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--card-background);
+            padding: 16px 20px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input, select {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(208, 26, 232, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background-color: #ab0ceb;
+        }
+
+        #getEmails {
+            background-color: var(--secondary-color);
+        }
+
+        #getEmails:hover {
+            background-color: #2d9047;
+        }
+
+        .email-container {
+            display: flex;
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        #emailList {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 600px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .email-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .email-item:hover {
+            background-color: var(--hover-color);
+        }
+
+        .email-item.unread {
+            background-color: var(--unread-color);
+            font-weight: 500;
+        }
+
+        .email-subject {
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+
+        .email-from, .email-date {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        #emailContent {
+            flex: 2;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .email-header {
+            margin-bottom: 20px;
+        }
+
+        .email-header h2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .email-header p {
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 4px;
+        }
+
+        .email-body {
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .attachment {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            background-color: var(--hover-color);
+            border-radius: var(--border-radius);
+            font-size: 12px;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .attachment:hover {
+            background-color: #1f1f1f;
+        }
+
+        #backToInbox {
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .email-container {
+                flex-direction: column;
+            }
+
+            #emailList, #emailContent {
+                max-height: none;
+                border-right: none;
+            }
+
+            .input-group, .button-group {
+                flex-direction: column;
+            }
+
+            input, select, button {
+                width: 100%;
+            }
+        }
+
+        button {
+        background-color: #b700ff; /* Substitua pela cor desejada */
+        color: white; /* Cor do texto */
+        border: none; /* Remove a borda padrão */
+        padding: 10px 20px; /* Espaçamento interno */
+        border-radius: 5px; /* Bordas arredondadas */
+        cursor: pointer; /* Muda o cursor para indicar que é clicável */
+        transition: background-color 0.3s; /* Efeito de transição */
+        }
+
+                #menuButton {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px;
+        background-color: #222;
+        color: #b700ff;
+        border: none;
+        cursor: pointer;
+        z-index: 9999;
+        border-radius: 10px;
+        }
+
+        .menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 10px;
+        width: 170px;
+        background-color: #222;
+        padding: 10px;
+        border-radius: 10px;
+        z-index: 999;
+        }
+
+        .menu a {
+        display: block;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 5px 0;
+        }
+
+        .menu a:hover {
+        background-color: #1a1a1a;
+        }
+
+        .separator {
+            width: 100%;
+            height: 1px; /* Grosor del separador */
+            background-color: #b700ff; /* Color del separador */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9); 
+            margin: 5px 0; /* Espacio alrededor del separador */
+        }
+
+        .circle-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 100px;
+        height: 50px;
+        background-color: #b700ff;
+        border-radius: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 0 10px #b700ff;
+        }
+
+    </style>
+</head>
+<body>
+
+        <!-- Botão canto superior esquerdo -->
+        <div class="cont">
+            <button id="menuButton">☰</button>
+            <div class="menu" id="menu">
+                <a href="file:///C:/Users/ferna/Downloads/MEU SITE/album-hover/album-hover/dist/index.html" aria-label="Abrir Checker">Voltar ao Menu</a>
+                <div class="separator"></div>
+                <a href="https://t.me/nd_archives/82" target="_blank" rel="noopener noreferrer">Consulta de dados</a>
+                <div class="separator"></div>
+                <a href="https://t.me/NDBIGODE" target="_blank" rel="noopener noreferrer">Entre em Contato</a>
+                <div class="separator"></div>
+                <a href="https://t.me/nd_archives" target="_blank" rel="noopener noreferrer">ND ﷼  𝐀𝐑𝐂𝐇𝐈𝐕𝐄𝐒</a>
+            </div>
+        </div>
+<br>
+<br>
+        <!-- Script para o botão abrir -->
+        <script>
+            const menuButton = document.getElementById('menuButton');
+            const menu = document.getElementById('menu');
+    
+            menuButton.addEventListener('click', () => {
+                // Alterna a exibição do menu
+                if (menu.style.display === 'none' || menu.style.display === '') {
+                    menu.style.display = 'block';
+                } else {
+                    menu.style.display = 'none';
+                }
+            });
+        </script>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-envelope"></i>
+                <h1>ND MAIL V1 | TempMail</h1>
+            </div>
+        </header>
+
+        <div class="input-group">
+            <input type="text" id="customUsername" placeholder="Nome de usuário personalizado (opcional)">
+            <select id="domainList"></select>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="email" placeholder="Seu e-mail temporário" readonly>
+        </div>
+
+        <div class="button-group">
+            <button id="generateEmail"><i class="fas fa-plus"></i> Gerar E-mail</button>
+            <button id="newEmail"><i class="fas fa-sync"></i> Novo E-mail</button>
+            <button id="getEmails"><i class="fas fa-search"></i> Buscar E-mails</button>
+        </div>
+
+        <button id="backToInbox"><i class="fas fa-arrow-left"></i> Voltar para Caixa de Entrada</button>
+
+        <div class="email-container">
+            <ul id="emailList"></ul>
+            <div id="emailContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://www.1secmail.com/api/v1/';
+        let activeEmail = '';
+        let refreshInterval;
+        let currentEmails = [];
+
+        const domainList = document.getElementById('domainList');
+        const customUsername = document.getElementById('customUsername');
+        const generateEmailButton = document.getElementById('generateEmail');
+        const newEmailButton = document.getElementById('newEmail');
+        const getEmailsButton = document.getElementById('getEmails');
+        const emailInput = document.getElementById('email');
+        const emailList = document.getElementById('emailList');
+        const emailContent = document.getElementById('emailContent');
+        const backToInbox = document.getElementById('backToInbox');
+        const emailContainer = document.querySelector('.email-container');
+
+        // Função para buscar dados da API
+        async function fetchData(url) {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }
+
+        // Função para obter a lista de domínios
+        async function getDomains() {
+            const url = `${API_BASE_URL}?action=getDomainList`;
+            return fetchData(url);
+        }
+
+        // Função para gerar um novo e-mail temporário
+        async function generateEmail() {
+            const username = customUsername.value || null;
+            const domain = domainList.value;
+            if (username) {
+                return `${username}@${domain}`;
+            } else {
+                const url = `${API_BASE_URL}?action=genRandomMailbox&count=1`;
+                const [email] = await fetchData(url);
+                return email;
+            }
+        }
+
+        // Função para obter os detalhes dos emails recebidos
+        async function getEmailsDetails(email) {
+            const [username, domain] = email.split('@');
+            const url = `${API_BASE_URL}?action=getMessages&login=${username}&domain=${domain}`;
+            return fetchData(url);
+        }
+
+        // Função para obter o conteúdo de um email específico
+        async function getEmailContent(email, id) {
+            const [username, domain] = email.split('@');
+            const url = `${API_BASE_URL}?action=readMessage&login=${username}&domain=${domain}&id=${id}`;
+            return fetchData(url);
+        }
+
+        // Função para criar um link para download de anexo
+        function createAttachmentLink(email, id, file) {
+            const [username, domain] = email.split('@');
+            return `${API_BASE_URL}?action=download&login=${username}&domain=${domain}&id=${id}&file=${encodeURIComponent(file)}`;
+        }
+
+        // Função para renderizar um item da lista de emails
+        function renderEmailListItem(email) {
+            const listItem = document.createElement('li');
+            listItem.className = 'email-item' + (email.seen ? '' : ' unread');
+            listItem.innerHTML = `
+                <div class="email-subject">${email.subject}</div>
+                <div class="email-from">${email.from}</div>
+                <div class="email-date">${email.date}</div>
+            `;
+            listItem.addEventListener('click', () => displayEmailContent(email.id));
+            return listItem;
+        }
+
+        // Função para renderizar a lista de emails
+        function renderEmailList(emails) {
+            emailList.innerHTML = ''; // Limpa a lista antes de renderizar
+            emails.forEach(email => {
+                emailList.appendChild(renderEmailListItem(email));
+            });
+        }
+
+        // Função para renderizar o conteúdo de um email
+        function renderEmailContent(fullEmail) {
+            let attachmentsHtml = '';
+            if (fullEmail.attachments && fullEmail.attachments.length > 0) {
+                attachmentsHtml = '<div class="attachments">Anexos: ' +
+                    fullEmail.attachments.map(att => 
+                        `<a href="${createAttachmentLink(activeEmail, fullEmail.id, att.filename)}" class="attachment" download><i class="fas fa-paperclip"></i> ${att.filename}</a>`
+                    ).join('') + '</div>';
+            }
+
+            emailContent.innerHTML = `
+                <div class="email-header">
+                    <h2>${fullEmail.subject}</h2>
+                    <p><strong>De:</strong> ${fullEmail.from}</p>
+                    <p><strong>Data:</strong> ${fullEmail.date}</p>
+                    ${attachmentsHtml}
+                </div>
+                <div class="email-body">${fullEmail.htmlBody || fullEmail.textBody}</div>
+            `;
+        }
+
+        // Função para exibir a lista de emails recebidos
+        async function displayEmails() {
+            if (!activeEmail) {
+                alert("Por favor, gere um e-mail temporário primeiro.");
+                return;
+            }
+
+            try {
+                const emails = await getEmailsDetails(activeEmail);
+                currentEmails = emails;
+                renderEmailList(emails);
+                showEmailList();
+            } catch (error) {
+                console.error("Erro ao buscar emails:", error);
+                emailList.innerHTML = `<li>Erro ao buscar e-mails: ${error.message}</li>`;
+            }
+        }
+
+        // Função para exibir o conteúdo do email selecionado
+        async function displayEmailContent(id) {
+            try {
+                const fullEmail = await getEmailContent(activeEmail, id);
+                renderEmailContent(fullEmail);
+                showEmailContent();
+            } catch (error) {
+                console.error("Erro ao carregar o conteúdo do email:", error);
+                emailContent.innerHTML = `<p>Erro ao carregar o conteúdo do e-mail: ${error.message}</p>`;
+            }
+        }
+
+        // Função para iniciar a atualização automática da lista de emails
+        function startAutoRefresh() {
+            stopAutoRefresh();
+            refreshInterval = setInterval(displayEmails, 10000);
+        }
+
+        // Função para parar a atualização automática da lista de emails
+        function stopAutoRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        }
+
+        // Evento para gerar um novo email temporário
+        generateEmailButton.addEventListener('click', async () => {
+            activeEmail = await generateEmail();
+            emailInput.value = activeEmail;
+            localStorage.setItem('tempEmail', activeEmail);
+            console.log("E-mail gerado: " + activeEmail);
+            startAutoRefresh();
+            displayEmails();
+        });
+
+        // Evento para gerar um novo email temporário com um novo nome de usuário
+        newEmailButton.addEventListener('click', async () => {
+            customUsername.value = '';
+            await generateEmailButton.click();
+        });
+
+        // Evento para buscar e exibir os emails recebidos
+        getEmailsButton.addEventListener('click', displayEmails);
+
+        // Evento para voltar para a lista de emails
+        backToInbox.addEventListener('click', showEmailList);
+
+        // Funções para mostrar a lista de emails e o conteúdo do email
+        function showEmailList() {
+            emailList.style.display = 'block';
+            emailContent.style.display = 'none';
+            backToInbox.style.display = 'none';
+            emailContainer.style.flexDirection = 'row';
+        }
+
+        function showEmailContent() {
+            emailList.style.display = 'block';
+            emailContent.style.display = 'block';
+            backToInbox.style.display = 'block';
+            emailContainer.style.flexDirection = 'row';
+        }
+
+        // Inicialização do componente
+        (async function init() {
+            const domains = await getDomains();
+            domainList.innerHTML = domains.map(domain => `<option value="${domain}">${domain}</option>`).join('');
+            const savedEmail = localStorage.getItem('tempEmail');
+            if (savedEmail) {
+                activeEmail = savedEmail;
+                emailInput.value = savedEmail;
+                startAutoRefresh();
+                displayEmails();
+            }
+        })();
+    </script>
+
+<div class="neon-divider"></div> 
+<center>
+<div class="wiggle"> <!-- Texto em movimento no rodapé do site -->
+<span>©</span>
+<span> </span>
+<span> </span>
+<span> </span>
+<span>2</span>
+<span>0</span>
+<span>2</span>
+<span>4</span>
+<span> </span>
+<span> </span>
+<span> </span>
+<span>-</span>
+<span> </span>
+<span> </span>
+<span> </span>
+<span>N</span>
+<span>D</span>
+<span> </span>
+<span> </span>
+<span> </span>
+<span>M</span>
+<span>A</span>
+<span>I</span>
+<span>L</span>
+<span> </span>
+<span> </span>
+<span> </span>
+<span>V</span>
+<span>1</span>
+</center>
+</div>
+<div class="neon-divider"></div>
+
+</body>
+</html>

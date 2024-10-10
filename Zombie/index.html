@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="imagex/png" href="https://cdn-icons-png.flaticon.com/512/8002/8002111.png">
+  <title>ND GAMES | Zombie Mayhem</title>
+<link rel='stylesheet' href='https://eliortabeka.github.io/zombie-mayhem/styles/vendor.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+
+<div id="canves" data-wave="" class="loading intro">
+      <div class="loader"><div class="loading-char"><div class="zombie-loader"></div><span>Carregando</span></div></div>
+      <div class="game-cover"></div>
+      <div class="overlay-screen">
+        <h2 class="big-title game-over-title">Fim <div>de Jogo</div></h2>
+        <h2 class="big-title end-game-title">Você <div>Ganhou</div></h2>
+        <span class="restart-hint">Clique aqui para Reiniciar</span>
+        <h2 class="big-title game-pause-title">Pausado</h2>
+        <h2 class="big-title level-title">Level <span></span></h2>
+      </div>
+      <ul class="info-board">
+        <li class="killed-status"><span>0</span></li>
+        <li class="life"><i class="heart-icon"></i><i class="heart-icon"></i><i class="heart-icon"></i></li>
+        <li id="mute-music" data-tootik="Mute Music" data-tootik-conf="right invert"></li>
+        <li id="mute-sounds" data-tootik="Mute Sounds" data-tootik-conf="right invert"></li>
+      </ul>
+      <div id="pause-game"></div>
+      <div class="ammo" data-ammo="6"><span class="reload-key">R</span></div>
+      <div class="reload-hint"><div class="reload-trigger"></div></div>
+    </div>
+
+    <div id="footer">
+      <p>Feito à mão com <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.7 492.7" width="8" height="8"><path d="M492.7 166c0-73.5-59.6-133.1-133.1-133.1 -48 0-89.9 25.5-113.3 63.6 -23.4-38.1-65.3-63.6-113.3-63.6C59.6 33 0 92.5 0 166c0 40 17.7 75.8 45.7 100.2l188.5 188.6c3.2 3.2 7.6 5 12.1 5 4.6 0 8.9-1.8 12.1-5l188.5-188.6C475 241.8 492.7 206 492.7 166z"/></svg> by <a href="https://codepen.io/eliortabeka" target="_blank" title="Elior's Codepen">Elior Tabeka</a> | GPL License<p>
+      <div class="credits"><p>Recursos usados na construção deste jogo: <a href="https://eliortabeka.github.io/sprite-spirit/" target="_blank" title="Image Sprite to Animation using SCSS Mixin">Sprite Spirit</a> | <a href="https://eliortabeka.github.io/tootik/" target="_blank" title="Tooltips with Tootik">Tooltips</a></p></div>
+    </div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/250758/vendor.js'></script><script  src="./script.js"></script>
+
+<script>
+  document.addEventListener('keydown', function(e) {
+      // Verifica se a tecla Ctrl está pressionada junto com S, J ou I
+      if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'j' || e.key === 'J' || e.key === 'u' || e.key === 'U' || e.key === 'i' || e.key === 'I')) {
+          e.preventDefault(); // Impede a ação padrão
+          alert('Você foi infectado, não tente roubar nosso site! 👹'); // Mensagem que aparece ao tentar executar algumas das funções bloqueadas
+      }
+  });
+</script>
+
+<script>
+if (document.addEventListener) {
+    document.addEventListener("contextmenu", function(e) {
+        e.preventDefault();
+        return false;
+    });
+} else { //Versões antigas do IE
+    document.attachEvent("oncontextmenu", function(e) {
+        e = e || window.event;
+        e.returnValue = false;
+        return false;
+    });
+}
+</script>
+
+<style>
+/*desabilita a seleção no body*/
+body {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Chrome/Safari/Opera */
+       -khtml-user-select: none; /* Konqueror */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none;
+}
+
+/*habilita a seleção nos campos editaveis*/
+input, textarea {
+    -webkit-touch-callout: initial; /* iOS Safari */
+      -webkit-user-select: text; /* Chrome/Safari/Opera */
+       -khtml-user-select: text; /* Konqueror */
+         -moz-user-select: text; /* Firefox */
+          -ms-user-select: text; /* Internet Explorer/Edge */
+              user-select: text;
+}
+
+/*habilita a seleção nos campos com o atributo contenteditable*/
+[contenteditable=true] {
+    -webkit-touch-callout: initial; /* iOS Safari */
+      -webkit-user-select: all; /* Chrome/Safari/Opera */
+       -khtml-user-select: all; /* Konqueror */
+         -moz-user-select: all; /* Firefox */
+          -ms-user-select: all; /* Internet Explorer/Edge */
+              user-select: all;
+}
+  </style>
+
+</body>
+</html>

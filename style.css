@@ -3,6 +3,10 @@ html {
   height: 100%;
 }
 
+a[href*="https://mt0916264.github.io/ND/Gerador/index.html"] {
+    display: none !important;
+}
+
 * {
   box-sizing: border-box;
 }
